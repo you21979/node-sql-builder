@@ -9,6 +9,7 @@
 
 ### プログラムから扱いやすい型名とする
 
+* bool
 * int8 - 64
 * uint8 - 64
 * float
@@ -17,6 +18,11 @@
 * string
 * blob
 * time
+
+### todo
+
+* enum
+* struct
 
 ## 共通
 
