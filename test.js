@@ -1,6 +1,5 @@
 var parseString = require("xml2js").parseString;
 var fs = require("fs");
-var x = fs.readFileSync("fixture/ex1.xml", "utf8");
 
 var Column = function(v){
     this.name = v.$.name
@@ -42,6 +41,7 @@ Generator.prototype.generate = function(){
 }
 
 var main = function(){
+    var x = fs.readFileSync("fixture/ex1.xml", "utf8");
     parseString(x, function (err, result) {
         var g = new Generator(new Root(result.root));
         console.log(g);
