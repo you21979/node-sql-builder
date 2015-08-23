@@ -1,0 +1,6 @@
+{% for table in root.tables -%}
+CREATE TABLE {{ table.name }} (
+{%  for column in table.columns %} {{ column.name }} {{ sql[column.type] }}
+{%  endfor %}
+)
+{% endfor %}

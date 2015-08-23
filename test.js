@@ -1,4 +1,5 @@
 var parseString = require("xml2js").parseString;
+var squel = require("squel");
 var fs = require("fs");
 
 var Column = function(v){
@@ -33,18 +34,27 @@ var Root = function(v){
     initialize(this,v);
 }
 
-var Generator = function(data){
-    this.define = data
+var swig  = require('swig');
+var Generator = function(root){
+    this.root = root
+    this.sql = {
+        uint64 : "BIGINT",
+        uint32 : "INT",
+        uint16 : "MIDIUM",
+        string : "VARCHAR",
+        double : "DOUBLE",
+        time : "TIMESTAMP",
+    }
 }
 Generator.prototype.generate = function(){
-    
+    return swig.renderFile('./tmpl/x.js.tmpl', this);
 }
 
 var main = function(){
     var x = fs.readFileSync("fixture/ex1.xml", "utf8");
     parseString(x, function (err, result) {
         var g = new Generator(new Root(result.root));
-        console.log(g);
+        console.log(g.generate());
     });
 }
 
