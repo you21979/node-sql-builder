@@ -1,0 +1,27 @@
+<ddl group="player">
+ <table name="account">
+  <column type="uint64" name="id" attr="key"/>
+  <column type="string" name="last_login_ip"/>
+  <column type="time" name="last_login_timestamp"/>
+  <column type="time" name="updated_at" attr="current_timestamp"/>
+  <column type="time" name="created_at"/>
+ </table>
+ <table name="chara">
+  <column type="uint64" name="id" attr="key"/>
+  <column type="uint64" name="account_id" attr="idx"/>
+  <column type="string" name="name" attr="idx"/>
+  <column type="uint32" name="hp"/>
+  <column type="uint32" name="mp"/>
+  <column type="uint32" name="job"/>
+  <column type="time" name="updated_at" attr="current_timestamp"/>
+  <column type="time" name="created_at"/>
+ </table>
+ <table name="position">
+  <column type="uint64" name="chara_id" attr="key"/>
+  <column type="uint32" name="mapid" attr="idx"/>
+  <column type="double" name="x"/>
+  <column type="double" name="y"/>
+  <column type="double" name="z"/>
+  <column type="uint16" name="dir"/>
+ </table>
+</ddl>
