@@ -1,0 +1,36 @@
+module.exports = (function(){
+    return {
+{% for table in root.tables -%}
+{% for column in table.getColumnByAttr('key') -%}
+    "{{table.name}}_select_by_key" : (function(){
+        return [
+            'SELECT',
+            [
+                {% for column in table.columns -%}'{{ column.name }}',{%-  endfor %}
+            ].join(','),
+            'FROM',
+            '{{table.name}}',
+            'WHERE',
+            '({{column.name}} = ?)',
+            ';'
+        ].join(' ');
+    })(),
+{% endfor %}
+{% for column in table.getColumnByAttr('idx') -%}
+    "{{table.name}}_select_by_{{ column.name }}" : (function(){
+        return [
+            'SELECT',
+            [
+                {% for column in table.columns -%}'{{ column.name }}',{%-  endfor %}
+            ].join(','),
+            'FROM',
+            '{{table.name}}',
+            'WHERE',
+            '({{column.name}} = ?)',
+            ';'
+        ].join(' ');
+    })(),
+{% endfor %}
+{% endfor %}
+    }
+})()
